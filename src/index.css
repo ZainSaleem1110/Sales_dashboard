@@ -1,0 +1,10 @@
+.container {
+  padding: 20px;
+  font-family: sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+input[type="file"] {
+  margin: 10px 0;
+}
