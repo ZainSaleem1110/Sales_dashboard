@@ -49,8 +49,8 @@ function App() {
 
   if (!data.length) {
     return (
-      <div className="container">
-        <h1>📊 Sales Dashboard (React + Plotly)</h1>
+      <div>
+        <h1>📊 Sales Dashboard</h1>
         <input type="file" accept=".json" onChange={handleFileUpload} />
         <p>Upload a sales JSON file to begin</p>
       </div>
@@ -91,7 +91,7 @@ function App() {
 
   return (
     <>
-     <h1>📊 Sales Dashboard (React + Plotly)</h1>
+     <h1>📊 Sales Dashboard</h1>
       <input type="file" accept=".json" onChange={handleFileUpload} />
     <div className="container">
 
