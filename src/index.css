@@ -1,10 +1,51 @@
+body{
+  background: #272950;
+  padding: 20px;
+}
+
 .container {
   padding: 20px;
   font-family: sans-serif;
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.custom-file-upload, .download_sample_file {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  background-color: #4f46e5;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom-file-upload:hover, .download_sample_file:hover {
+  background-color: #4338ca;
 }
 
 input[type="file"] {
-  margin: 10px 0;
+  display: none;
+}
+
+.download_sample_file{
+  text-decoration: none !important;
+}
+
+.heading{
+  text-align: center;
+  color: white;
+  font-size: 50px;
+}
+
+.button_bar{
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px;
+  gap: 10px;
 }
