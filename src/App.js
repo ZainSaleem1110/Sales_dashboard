@@ -1,6 +1,7 @@
 // src/App.jsx
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import * as XLSX from 'xlsx';
 import defaultData from "./data.json";
 import Dashboard from "./dashboard";
 
@@ -11,7 +12,7 @@ function App() {
     setData(defaultData); // load initial data
   }, []);
 
-  const handleFileUpload = (e) => {
+  const handleJsonFile = (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
@@ -39,10 +40,43 @@ function App() {
     reader.readAsText(file);
   };
 
+  const formatDate = (date) => {
+  if (!date) return "";
+  const d = new Date(date);
+  return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+};
+
+  const handleExcelFile = async (e) => {
+    const file = e.target.files[0];
+    const data = await file.arrayBuffer();
+    const workbook = XLSX.read(data);
+    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+    const rawJson = XLSX.utils.sheet_to_json(worksheet, { raw: false });
+
+  const jsonData = rawJson.map((item) => ({
+    ...item,
+    "Order Date": formatDate(item["Order Date"]),
+    "Ship Date": formatDate(item["Ship Date"]),
+  }));
+    setData(jsonData)
+  };
+
   return (
     <>
       <h1 className="heading">Sales Dashboard</h1>
       <div className="button_bar">
+        <div>
+          <label htmlFor="excel-upload" className="custom-file-upload">
+            📄 Upload Excel File
+          </label>
+          <input
+            id="excel-upload"
+            type="file"
+            accept=".xlsx, .xls"
+            onChange={handleExcelFile}
+            style={{ display: "none" }}
+          />
+        </div>
         <div>
           <label htmlFor="file-upload" className="custom-file-upload">
             📁 Upload JSON File
@@ -51,15 +85,15 @@ function App() {
             id="file-upload"
             type="file"
             accept=".json"
-            onChange={handleFileUpload}
+            onChange={handleJsonFile}
           />
         </div>
         <a
-          href="/data.json"
-          download="sample-sales-data.json"
+          href="/Sample_Data.xls"
+          download
           className="download_sample_file"
         >
-          ⬇️ Download Sample JSON File
+          ⬇️ Download Sample Excel File
         </a>
       </div>
 
